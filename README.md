@@ -9,7 +9,8 @@ A Retrieval-Augmented Generation (RAG) chatbot that answers questions about Indi
 - **Local LLM**: Powered by Ollama (Phi model) for privacy and offline capability
 - **Vector Database**: ChromaDB for efficient similarity search
 - **Web Interface**: Clean Flask-based UI for easy interaction
-- **CLI Interface**: Command-line tool for quick queries
+- **CLI Interface**: Interactive command-line tool with conversation history
+- **Conversation History**: Remembers previous questions for contextual follow-ups
 - **Source Attribution**: Shows relevant document excerpts with each answer
 - **Performance Metrics**: Displays retrieval and generation times
 
@@ -101,11 +102,21 @@ The system currently includes knowledge about:
 
 ### Command Line Interface
 
+The CLI provides an interactive chat experience with conversation history:
+
 ```bash
 python app.py
 ```
 
-Then type your question when prompted.
+**Features:**
+- **Continuous Conversation**: Ask multiple questions in one session
+- **Conversation History**: Bot remembers previous questions and answers
+- **Follow-up Questions**: Use pronouns and context from earlier in the conversation
+
+**Commands:**
+- Type your questions naturally
+- `exit`, `quit`, or `q` - End the conversation
+- `clear` - Reset conversation history and start fresh
 
 ## 📁 Project Structure
 
@@ -173,7 +184,7 @@ TOP_K = 5                           # Number of documents to retrieve
 
 ## 🔍 Example Queries
 
-Try asking questions like:
+### Single Questions
 
 **Education:**
 - "What is the Intermediate Education Act of 1921?"
@@ -190,6 +201,53 @@ Try asking questions like:
 **Housing:**
 - "What are the rights and obligations of landlords?"
 - "How can a landlord evict a tenant?"
+
+### Conversation Examples with Follow-ups
+
+**Example 1: Mental Health Policy**
+```
+You: What is the Mental Healthcare Act 2017 about?
+Bot: The Mental Healthcare Act, 2017 is legislation that provides for mental 
+     healthcare and services for persons with mental illness...
+
+You: What are the key rights it provides?
+Bot: The Act provides several key rights including the right to access mental 
+     healthcare, right to equality of treatment...
+
+You: Can you explain advance directives?
+Bot: An advance directive is a written statement made by a person under section 5...
+
+You: How can it be revoked?
+Bot: An advance directive can be revoked, amended, or cancelled by the person...
+```
+
+**Example 2: Landlord-Tenant Relations**
+```
+You: What are the rights and obligations of landlords?
+Bot: Landlords have several rights and obligations under the rent agreement act...
+
+You: Can they evict a tenant?
+Bot: Yes, landlords can evict tenants under certain conditions specified in 
+     Chapter V of the act...
+
+You: What's the notice period?
+Bot: The notice period for eviction depends on the specific grounds...
+
+You: What about security deposits?
+Bot: Security deposits are covered under Chapter III, Section 11...
+```
+
+**Example 3: Using the clear command**
+```
+You: What is the Karnataka Traffic Control Act?
+Bot: [explains the act...]
+
+You: clear
+✓ Conversation history cleared.
+
+You: Tell me about health worker regulations
+Bot: [starts fresh conversation about health workers...]
+```
 
 ## 🧪 Testing Your RAG Model
 
