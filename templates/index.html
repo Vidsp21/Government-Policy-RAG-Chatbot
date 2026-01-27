@@ -336,6 +336,9 @@
         const questionInput = document.getElementById('questionInput');
         const askButton = document.getElementById('askButton');
         const loading = document.getElementById('loading');
+        
+        // Store session ID for conversation history
+        let sessionId = null;
 
         function handleKeyPress(event) {
             if (event.key === 'Enter' && !askButton.disabled) {
@@ -376,13 +379,21 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ question: question })
+                    body: JSON.stringify({ 
+                        question: question,
+                        session_id: sessionId 
+                    })
                 });
 
                 const data = await response.json();
 
                 if (!response.ok) {
                     throw new Error(data.error || 'An error occurred');
+                }
+                
+                // Store session ID for conversation continuity
+                if (data.session_id) {
+                    sessionId = data.session_id;
                 }
 
                 // Add bot response
@@ -415,21 +426,6 @@
         function addBotResponse(data) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message bot';
-            
-            let sourcesHtml = '';
-            if (data.sources && data.sources.length > 0) {
-                sourcesHtml = '<div class="sources"><h4>📄 Source Documents</h4>';
-                data.sources.forEach(source => {
-                    const metadata = source.metadata.source || 'Unknown source';
-                    sourcesHtml += `
-                        <div class="source-item">
-                            <div><strong>Source ${source.index}:</strong> ${escapeHtml(source.content)}</div>
-                            <div class="source-metadata">📁 ${escapeHtml(metadata)}</div>
-                        </div>
-                    `;
-                });
-                sourcesHtml += '</div>';
-            }
 
             let metricsHtml = '';
             if (data.retrieval_time && data.generation_time) {
@@ -447,7 +443,6 @@
                 <div class="message-content">
                     ${escapeHtml(data.answer).replace(/\n/g, '<br>')}
                     ${metricsHtml}
-                    ${sourcesHtml}
                 </div>
             `;
             
