@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, jsonify, session
 from query.retriever import retrieve_context
 from query.rag_chain import generate_answer_with_history
+from database import init_database, store_response
 import time
 import secrets
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # Required for session support
+
+# Initialize database on startup
+init_database()
 
 # Store conversation history per session
 conversation_sessions = {}
@@ -50,6 +54,19 @@ def ask_question():
         # Keep history manageable (last 10 exchanges = 20 messages)
         if len(conversation_history) > 20:
             conversation_sessions[session_id] = conversation_history[-20:]
+        
+        # Store in database
+        try:
+            record_id = store_response(
+                user_query=question,
+                llm_response=answer,
+                chunks=docs,
+                retrieval_time=retrieval_time,
+                generation_time=generation_time
+            )
+            print(f"💾 Response saved to database (Record ID: {record_id})")
+        except Exception as db_error:
+            print(f"⚠️  Database error: {str(db_error)}")
         
         # Format source documents
         sources = []
