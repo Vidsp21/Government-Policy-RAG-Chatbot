@@ -13,26 +13,26 @@ When answering follow-up questions:
 - Maintain consistency with previous responses
 """
 
-def generate_answer(context, question):
-    """Generate answer without conversation history (for web interface compatibility)"""
-    prompt = f"""
-{SYSTEM_PROMPT}
+# def generate_answer(context, question):
+#     """Generate answer without conversation history """
+#     prompt = f"""
+# {SYSTEM_PROMPT}
 
-Context:
-{context}
+# Context:
+# {context}
 
-Question:
-{question}
-"""
+# Question:
+# {question}
+# """
 
-    response = ollama.chat(
-        model=LLM_MODEL,
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
-    )
+#     response = ollama.chat(
+#         model=LLM_MODEL,
+#         messages=[
+#             {"role": "user", "content": prompt}
+#         ]
+#     )
 
-    return response["message"]["content"]
+#     return response["message"]["content"]
 
 def generate_answer_with_history(context, question, conversation_history):
     """Generate answer with conversation history for follow-up questions"""

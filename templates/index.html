@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -106,33 +106,6 @@
             color: #666;
             margin-bottom: 5px;
             font-weight: 600;
-        }
-
-        .sources {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            font-size: 0.9rem;
-        }
-
-        .sources h4 {
-            margin-bottom: 10px;
-            color: #162568;
-        }
-
-        .source-item {
-            padding: 10px;
-            margin-bottom: 8px;
-            background: white;
-            border-radius: 5px;
-            border-left: 3px solid #162568;
-        }
-
-        .source-metadata {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 5px;
         }
 
         .metrics {
@@ -230,40 +203,6 @@
             border-left: 4px solid #c62828;
         }
 
-        .welcome-message {
-            text-align: center;
-            color: #666;
-            padding: 40px 20px;
-        }
-
-        .welcome-message h3 {
-            color: #162568;
-            margin-bottom: 15px;
-        }
-
-        .example-questions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .example-question {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid #e0e0e0;
-        }
-
-        .example-question:hover {
-            border-color: #162568;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2);
-        }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8rem;
@@ -291,26 +230,7 @@
         </div>
 
         <div class="chat-container">
-            <div class="messages" id="messages">
-                <div class="welcome-message">
-                    <h3>Welcome! How can I help you today?</h3>
-                    <p>Ask me anything about government policies in areas like:</p>
-                    <div class="example-questions">
-                        <div class="example-question" onclick="askExample('What are the tax benefits for startups?')">
-                            💼 Tax Benefits
-                        </div>
-                        <div class="example-question" onclick="askExample('How do I apply for healthcare benefits?')">
-                            🏥 Healthcare
-                        </div>
-                        <div class="example-question" onclick="askExample('What are the education loan schemes?')">
-                            📚 Education
-                        </div>
-                        <div class="example-question" onclick="askExample('What are the employment policies?')">
-                            👔 Employment
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="messages" id="messages"></div>
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
@@ -346,23 +266,12 @@
             }
         }
 
-        function askExample(question) {
-            questionInput.value = question;
-            askQuestion();
-        }
-
         async function askQuestion() {
             const question = questionInput.value.trim();
             
             if (!question) {
                 alert('Please enter a question');
                 return;
-            }
-
-            // Remove welcome message if it exists
-            const welcomeMsg = document.querySelector('.welcome-message');
-            if (welcomeMsg) {
-                welcomeMsg.remove();
             }
 
             // Add user message
