@@ -12,55 +12,79 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #37447d 0%, #050a46 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #212121;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
             text-align: center;
-            color: white;
-            margin-bottom: 30px;
+            color: #ececec;
             padding: 20px;
+            background: #2f2f2f;
+            border-bottom: 1px solid #3e3e3e;
+            flex-shrink: 0;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ececec;
         }
 
         .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 0.9rem;
+            color: #b4b4b4;
         }
 
         .chat-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #343541;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 75vh;
-            min-height: 500px;
+            flex: 1;
+            min-height: 0;
         }
 
         .messages {
             flex: 1;
-            padding: 30px;
             overflow-y: auto;
-            background: #f8f9fa;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages::-webkit-scrollbar-track {
+            background: #343541;
+        }
+
+        .messages::-webkit-scrollbar-thumb {
+            background: #565869;
+            border-radius: 4px;
+        }
+
+        .messages::-webkit-scrollbar-thumb:hover {
+            background: #6e6e80;
         }
 
         .message {
-            margin-bottom: 20px;
+            padding: 24px 0;
             animation: fadeIn 0.3s ease-in;
         }
 
@@ -76,117 +100,139 @@
         }
 
         .message.user {
-            text-align: right;
+            background: #343541;
+        }
+
+        .message.bot {
+            background: #444654;
+        }
+
+        .message-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 24px;
+        }
+
+        .message-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .message.user .message-avatar {
+            background: #5b5bd6;
+        }
+
+        .message.bot .message-avatar {
+            background: #10a37f;
         }
 
         .message-content {
-            display: inline-block;
-            padding: 15px 20px;
-            border-radius: 15px;
-            max-width: 70%;
+            flex: 1;
+            color: #ececec;
             word-wrap: break-word;
-        }
-
-        .message.user .message-content {
-            background: linear-gradient(135deg, #37447d 0%, #050a46 100%);
-            color: white;
-            border-bottom-right-radius: 5px;
-        }
-
-        .message.bot .message-content {
-            background: white;
-            color: #333;
-            border: 1px solid #e0e0e0;
-            border-bottom-left-radius: 5px;
-            text-align: left;
-        }
-
-        .message-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 5px;
-            font-weight: 600;
+            line-height: 1.7;
         }
 
         .metrics {
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: #666;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #8e8ea0;
         }
 
         .metric {
-            background: #e8e8e8;
-            padding: 5px 10px;
-            border-radius: 5px;
+            background: #40414f;
+            padding: 4px 10px;
+            border-radius: 4px;
         }
 
         .input-container {
             padding: 20px;
-            background: white;
-            border-top: 1px solid #e0e0e0;
+            background: #343541;
+            border-top: 1px solid #40414f;
         }
 
         .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            background: #40414f;
+            border-radius: 8px;
+            padding: 12px;
         }
 
         #questionInput {
             flex: 1;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
+            padding: 12px;
+            background: transparent;
+            color: #ececec;
+            border: none;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s;
+            font-family: inherit;
         }
 
-        #questionInput:focus {
-            border-color: #162568;
+        #questionInput::placeholder {
+            color: #8e8ea0;
         }
 
         #askButton {
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #37447d 0%, #050a46 100%);
+            padding: 10px 20px;
+            background: #10a37f;
             color: white;
             border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background 0.2s;
+            flex-shrink: 0;
         }
 
         #askButton:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: #0d8a6a;
         }
 
         #askButton:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
         .loading {
             display: none;
-            text-align: center;
-            padding: 20px;
+            padding: 24px 0;
+            background: #444654;
         }
 
         .loading.active {
             display: block;
         }
 
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #162568;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        .loading-inner {
+            max-width: 800px;
             margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 24px;
+        }
+
+        .spinner {
+            border: 2px solid #40414f;
+            border-top: 2px solid #10a37f;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -195,25 +241,30 @@
         }
 
         .error {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-            border-left: 4px solid #c62828;
+            background: #f23535;
+            color: white;
+            padding: 16px 24px;
+            margin: 12px auto;
+            max-width: 800px;
+            border-radius: 8px;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 1.3rem;
             }
 
-            .message-content {
-                max-width: 85%;
+            .message-inner, .loading-inner {
+                padding: 0 16px;
+            }
+
+            .input-container {
+                padding: 16px;
             }
 
             .input-wrapper {
                 flex-direction: column;
+                gap: 8px;
             }
 
             #askButton {
@@ -233,8 +284,13 @@
             <div class="messages" id="messages"></div>
 
             <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p style="margin-top: 10px; color: #162568;">Processing your question...</p>
+                <div class="loading-inner">
+                    <div class="message-avatar" style="background: #10a37f;">🤖</div>
+                    <div style="flex: 1; display: flex; align-items: center; gap: 12px; color: #ececec;">
+                        <div class="spinner"></div>
+                        <span>Processing your question...</span>
+                    </div>
+                </div>
             </div>
 
             <div class="input-container">
@@ -242,10 +298,10 @@
                     <input 
                         type="text" 
                         id="questionInput" 
-                        placeholder="Type your question here..."
+                        placeholder="Send a message..."
                         onkeypress="handleKeyPress(event)"
                     >
-                    <button id="askButton" onclick="askQuestion()">Ask</button>
+                    <button id="askButton" onclick="askQuestion()">Send</button>
                 </div>
             </div>
         </div>
@@ -270,7 +326,6 @@
             const question = questionInput.value.trim();
             
             if (!question) {
-                alert('Please enter a question');
                 return;
             }
 
@@ -321,11 +376,13 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
             
-            const label = type === 'user' ? 'You' : 'Assistant';
+            const avatar = type === 'user' ? '👤' : '🤖';
             
             messageDiv.innerHTML = `
-                <div class="message-label">${label}</div>
-                <div class="message-content">${escapeHtml(content)}</div>
+                <div class="message-inner">
+                    <div class="message-avatar">${avatar}</div>
+                    <div class="message-content">${escapeHtml(content)}</div>
+                </div>
             `;
             
             messagesDiv.appendChild(messageDiv);
@@ -348,10 +405,12 @@
             }
             
             messageDiv.innerHTML = `
-                <div class="message-label">Assistant</div>
-                <div class="message-content">
-                    ${escapeHtml(data.answer).replace(/\n/g, '<br>')}
-                    ${metricsHtml}
+                <div class="message-inner">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        ${escapeHtml(data.answer).replace(/\n/g, '<br>')}
+                        ${metricsHtml}
+                    </div>
                 </div>
             `;
             
